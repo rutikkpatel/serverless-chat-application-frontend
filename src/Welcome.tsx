@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Welcome.css"
 
 export default function Welcome({
   setNickname,
@@ -9,11 +10,11 @@ export default function Welcome({
   const [error, setError] = useState("");
 
   return (
-    <section className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="max-w-md w-full bg-white rounded p-6 space-y-4">
+    <section className=" welcome-page flex justify-center items-center h-screen bg-gray-100">
+      <div className="signin-box max-w-md w-full bg-white rounded p-6 space-y-4">
         <div className="mb-4">
-          <p className="text-gray-600">Sign In</p>
-          <h2 className="text-xl font-bold">Join the Chat</h2>
+          <p className="text-gray-600 text-center mb-4">Sign In</p>
+          <h2 className="text-xl font-bold text-center">Serverless Chat Application</h2>
         </div>
         <div>
           <input
@@ -21,7 +22,7 @@ export default function Welcome({
               error !== "" ? "border-red-500" : "border-gray-200"
             }`}
             type="text"
-            placeholder="Nickname"
+            placeholder="Please Enter Your Nickname"
             value={nicknameValue}
             onChange={(e) => setNicknameValue(e.target.value)}
           />
@@ -33,7 +34,7 @@ export default function Welcome({
             ""
           )}
         </div>
-        <div>
+        <div className="joinbtn-div">
           <button
             onClick={() => {
               if (nicknameValue === "") {
@@ -42,9 +43,9 @@ export default function Welcome({
               }
               setNickname(nicknameValue);
             }}
-            className="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200"
+            className="join-btn w-full py-4 rounded text-sm font-bold text-gray-50 transition duration-200"
           >
-            Join
+            Start Conversation
           </button>
         </div>
       </div>
