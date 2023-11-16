@@ -10,13 +10,26 @@ export default function Sidebar({
   clients: string[];
   setTarget: (target: string) => void;
 }) {
+  const defaultImagePath = 'User_Avatar/User Avatar.png';
+
+  const getImagePath = (nickname: string) => {
+    const imagePath = `User_Avatar/${nickname}.jpg`;
+    try {
+      const img = new Image();
+      img.src = imagePath;
+      return img.complete ? imagePath : defaultImagePath;
+    } catch (error) {
+      return defaultImagePath;
+    }
+  };
+
   return (
     <>
       <div className="flex-none border-r-2 border-gray-200 md:w-64 sidebar-main">
         <div className="flex sm:items-center justify-between py-10 px-5">
           <div className="flex items-center space-x-2">
             <img
-              src={`User_Avatar/${me}.jpg`}
+              src={getImagePath(me)}
               alt=""
               className="w-8 rounded-full"
             />
@@ -34,7 +47,7 @@ export default function Sidebar({
                   onClick={() => setTarget(client)}
                 >
                   <img
-                    src={`User_Avatar/${client}.jpg`}
+                    src={getImagePath(client)}
                     alt=""
                     className="w-4 sm:w-8 h-10 sm:h-8 rounded-full"
                   />
@@ -52,7 +65,6 @@ export default function Sidebar({
                     </span>
                   </div>
                 </button>
-              {/* <hr  style={{borderColor : '#000000'}}/>               */}
               </div>
             ))}
           </div>

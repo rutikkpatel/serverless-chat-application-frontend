@@ -43,12 +43,23 @@ export default function Conversation({
     scrollToBottom();
   };
 
+  const getImagePath = (nickname: string) => {
+    const imagePath = `User_Avatar/${nickname}.jpg`;
+    try {
+      const img = new Image();
+      img.src = imagePath;
+      return img.complete ? imagePath : 'User_Avatar/User Avatar.png';
+    } catch (error) {
+      return 'User_Avatar/User Avatar.png';
+    }
+  };
+
   return (
     <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
       <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
         <div className="flex items-center space-x-4">
           <img
-            src={`User_Avatar/${target}.jpg`}
+            src={getImagePath(target)}
             alt=""
             className="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
           />
@@ -143,7 +154,7 @@ export default function Conversation({
                     ))}
                   </div>
                   <img
-                    src={`User_Avatar/${group.sender}.jpg`}
+                    src={getImagePath(group.sender)}
                     alt="My profile"
                     className={`w-6 h-6 rounded-full order-${
                       group.sender === target ? 1 : 2
